@@ -1,0 +1,43 @@
+<script>
+  const log = console.log;
+</script>
+
+<script>
+  /*
+  # 평가
+  -  코드가 계산(Evaluation) 되어 값을 만드는 것
+
+  # 일급
+  - 값으로 다룰 수 있다.
+  - 변수에 담을 수 있다.
+  - 함수의 인자로 사용 될 수 있다.
+  - 함수의 결과로 사용 될 수 있다.
+  */
+
+  const a = 10;
+  const add10 = (a) => a + 10;
+  const r = add10(a);
+  //log(r);
+</script>
+
+<script>
+  /*
+    #일급 함수
+    - 함수를 값으로 다룰 수 있다.
+    - 조합성과 추상화의 도구
+
+    함수형프로그래밍에서는 함수가 1급이라는 성질을 이용해서
+    많은 조합성을 만들어내고 추상화에 좋은 도구로 사용..
+    */
+
+  const add5 = (a) => a + 5;
+  log(add5);
+  log(add5(5));
+
+  const f1 = () => () => 1;
+  log(f1());
+
+  const f2 = f1();
+  log(f2);
+  log(f2());
+</script>
