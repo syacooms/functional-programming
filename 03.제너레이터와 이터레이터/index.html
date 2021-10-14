@@ -1,0 +1,76 @@
+<script>const log = console.log;</script>
+
+# 제너레이터/이터레이터
+- 제너레이터: 이터레이터이자 이터러블을 생성하는 함수
+
+제너레이터는 문장을 값으로 만들 수 있고 순회할 수 있는 값을 만들 수 있기 때문에
+자바스크립트에서는 제너레이터를 통해서 어떠한 상태나 값을 사실 상 순회할 수 있게 만들 수 있다.
+<script>
+    function *gen() {
+        yield 1;
+        //yield 2;
+        if (false) yield 2;
+        yield 3;
+        //return은 순회 시 done이 true일 때의 값.
+        return 100;
+    }
+
+    let iter = gen();
+    log(iter[Symbol.iterator]() == iter);
+    log(iter.next());
+    log(iter.next());
+    log(iter.next());
+    log(iter.next());
+
+    for (const a of gen(0)) log(a);
+    
+</script>
+
+
+# odds
+
+<script>
+    
+
+    function *infinity(i = 0) {
+        while(true) yield i++;
+    }
+    function *limit(l,iter){
+        for ( const a of iter) {
+            yield a;
+            if (a == l) return;
+        }
+    }
+    
+
+    function *odds(l) {
+        for (const a of limit(l, infinity(1))) {
+            if (a % 2) yield a;
+            if (a == l) return;
+        } 
+    }
+
+    let iter2 = odds(10);
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+    log(iter2.next());
+
+    console.clear();
+
+    for(const a of odds(40)) log(a);
+
+</script>
+
+# for of, 전개 연산자, 구조 분해, 나머지 연산자
+
+<script>
+    log(...odds(10));
+    log([...odds(10), ...odds(20)]);
+
+    const [a, b, ...rest] = odds(10);
+    log(a);
+    log(b);
+    log(rest);
+</script>
